@@ -19,7 +19,7 @@ jobs:
           node-version: 14
 
       - run: yarn --frozen-lockfile
-      - run: yarn build
+      - run: yarn build --modern
 
       - name: Deploy
         uses: crazy-max/ghaction-github-pages@v2
