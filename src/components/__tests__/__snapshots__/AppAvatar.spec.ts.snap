@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppAvatar.vue should match snapshot 1`] = `
+<div
+  class="img placeholder"
+  style="background-color: rgb(0, 0, 0);"
+/>
+`;
