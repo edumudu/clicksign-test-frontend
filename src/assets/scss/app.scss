@@ -1,0 +1,17 @@
+:root {
+  --text-color: #2a2d3b;
+  --bg-color: #f8f9fd;
+
+  --color-primary: #fa7268;
+  --color-secondary: #dbff90;
+
+  --white: #fff;
+  --gray: #c0c3d2;
+  --gray-lighter: #e4e7f4;
+  --gray-light: #e1e1e1;
+  --gray-dark: #9198af;
+  --pink-lighter: #fff3f2;
+}
+
+@import './reset.scss';
+@import './helpers.scss';

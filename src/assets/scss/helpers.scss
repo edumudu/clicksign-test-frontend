@@ -1,0 +1,15 @@
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.flex-1 { flex: 1; }
+
+.justify-end { justify-content: flex-end; }
+
+// Fonts
+.font-sm { font-size: 0.875rem; }
+.font-md { font-size: 1rem; }
+
+.text-center { text-align: center; }
+
+// Margin
+.ml-auto { margin-left: auto; }
+.mr-auto { margin-right: auto; }
