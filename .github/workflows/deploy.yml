@@ -18,8 +18,14 @@ jobs:
         with:
           node-version: 14
 
-      - run: yarn --frozen-lockfile
-      - run: yarn build --modern
+      - name: Install Deps
+        run: yarn --frozen-lockfile
+
+      - name: 
+        run: yarn test:unit
+
+      - name: Build
+        run: yarn build --modern
 
       - name: Deploy
         uses: crazy-max/ghaction-github-pages@v2
