@@ -56,12 +56,6 @@ module.exports = {
       ignores: [],
     }],
 
-    'vue/no-unused-properties': ['error', {
-      groups: ['props', 'data', 'computed', 'methods', 'setup'],
-      deepData: true,
-      ignorePublicMembers: false,
-    }],
-
     'vue/no-useless-mustaches': ['error', {
       ignoreIncludesComment: false,
       ignoreStringEscape: false,
