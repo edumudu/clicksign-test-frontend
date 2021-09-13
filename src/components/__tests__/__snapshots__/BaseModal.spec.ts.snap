@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BaseModal.vue no slot should match snapshot 1`] = `
+<div
+  class="wrapper"
+>
+  <div
+    class="content"
+  >
+    <div
+      class="header"
+    >
+      
+      
+    </div>
+    <div
+      class="body"
+    >
+      
+      
+    </div>
+    <div
+      class="actions"
+    >
+      
+      
+    </div>
+  </div>
+</div>
+`;
