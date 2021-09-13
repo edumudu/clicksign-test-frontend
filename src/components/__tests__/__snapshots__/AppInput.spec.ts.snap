@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppAvatar.vue should match snapshot 1`] = `
+<label
+  class="flex flex-col wrapper"
+>
+  <span
+    class="label"
+    style="display: none;"
+  />
+  <input
+    class="field"
+    type="text"
+  />
+</label>
+`;
