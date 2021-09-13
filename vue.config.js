@@ -1,6 +1,10 @@
 module.exports = {
   lintOnSave: false,
 
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/clicksign-test-frontend/'
+    : '/',
+
   chainWebpack: (config) => {
     const svgRule = config.module.rule('svg');
 
