@@ -102,8 +102,11 @@ module.exports = {
     'vue/no-extra-parens': 'error',
     'vue/no-irregular-whitespace': 'error',
     'vue/no-useless-concat': 'error',
-    'vue/object-curly-spacing': 'error',
+    'vue/object-curly-spacing': ['error', 'always'],
     'vue/prefer-template': 'error',
+
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    'import/prefer-default-export': 'off',
   },
 
   overrides: [
