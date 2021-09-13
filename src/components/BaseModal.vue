@@ -81,6 +81,7 @@ export default defineComponent({
   background: rgba(0, 0, 0, 0.5);
   display: grid;
   place-items: center;
+  padding: 0 0.5rem;
 }
 
 .content {

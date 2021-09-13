@@ -1,6 +1,11 @@
 <template>
   <header :class="$style.header">
-    <LogoSvg class="mr-auto" />
+    <div
+      class="mr-auto"
+      :class="$style.headerLogoWrapper"
+    >
+      <LogoSvg />
+    </div>
 
     <AppButton
       v-if="hasContact"
@@ -9,7 +14,9 @@
     >
       <IconPlus class="font-md" />
 
-      Criar contato
+      <span :class="$style.headerContactCreateText">
+        Criar contato
+      </span>
     </AppButton>
 
     <AppInput
@@ -91,7 +98,7 @@
   <div
     v-else
     class="text-center"
-    :class="$style.content"
+    :class="[$style.content, $style.contentEmpty]"
   >
     <EmptyData />
 
@@ -223,9 +230,16 @@ export default defineComponent({
 </script>
 
 <style lang="scss" module>
+@import "@/assets/scss/breakpoints.scss";
+
 .content {
-  margin-top: 6rem;
+  margin-top: 1rem;
   padding: 0 1rem;
+  flex: 1;
+
+  &.contentEmpty {
+    margin-top: 6rem;
+  }
 }
 
 .table {
@@ -236,6 +250,14 @@ export default defineComponent({
   th {
     text-align: left;
   }
+
+  > thead {
+    display: none;
+
+    @include sm {
+      display: initial;
+    }
+  }
 }
 
 .tableHeadCell {
@@ -245,14 +267,38 @@ export default defineComponent({
 
 .tableRow {
   display: grid;
-  grid-template-columns: 24px repeat(4, 1fr);
+  grid-template-columns: auto 1fr 1fr;
+  grid-template-areas:
+    "avatar actions actions"
+    "avatar name name"
+    "avatar email email"
+    "avatar phone phone";
+  gap: 0.5rem 1rem;
   align-items: center;
-  gap: 1rem;
   color: var(--text-color);
   padding: 0.75rem 0.5rem;
   background-color: var(--white);
-  border: 1px solid var(--gray-light);
   transition: background-color 0.2s ease-in-out;
+  margin: 1rem 0;
+  box-shadow: 0 0 3px #ccc;
+
+  @include sm {
+    margin: 0;
+    border: 1px solid var(--gray-light);
+    gap: 1rem;
+    grid-template-columns: 24px repeat(4, minmax(0, 1fr));
+    grid-template-areas: "avatar name email phone actions";
+  }
+
+  > td {
+    word-break: break-word;
+
+    &:nth-of-type(1) { grid-area: avatar; }
+    &:nth-of-type(2) { grid-area: name; }
+    &:nth-of-type(3) { grid-area: email; }
+    &:nth-of-type(4) { grid-area: phone; }
+    &:nth-of-type(5) { grid-area: actions; }
+  }
 }
 
 .tbodyRow {
@@ -279,6 +325,24 @@ export default defineComponent({
   gap: 1.5rem;
   align-items: center;
   color: var(--color-primary);
+  flex-wrap: wrap;
+
+  .headerContactCreateText {
+    display: none;
+
+    @include sm {
+      display: inline-block;
+    }
+  }
+
+  .headerLogoWrapper {
+    width: 100%;
+    text-align: center;
+
+    @include sm {
+      width: auto;
+    }
+  };
 }
 
 .searchField {
