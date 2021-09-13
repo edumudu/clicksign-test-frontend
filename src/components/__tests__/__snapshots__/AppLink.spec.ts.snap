@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppLink.vue should match snapshot 1`] = `
+<a
+  ariacurrentvalue="page"
+  custom="false"
+  replace="false"
+>
+  
+  
+</a>
+`;
