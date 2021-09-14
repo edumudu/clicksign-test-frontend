@@ -1,10 +1,11 @@
 <template>
-  <button
+  <Component
+    :is="$attrs.to ? 'AppLink' : 'button'"
     :class="[$style.btn, classes]"
     type="button"
   >
     <slot />
-  </button>
+  </Component>
 </template>
 
 <script lang="ts">
@@ -15,6 +16,8 @@ import {
   toRefs,
   useCssModule,
 } from 'vue';
+
+import AppLink from '@/components/AppLink.vue';
 
 type useDynamicClassesParams = {
   outline: Ref<boolean>;
@@ -38,6 +41,10 @@ const useDynamicClasses = ({ outline, large, variant }: useDynamicClassesParams)
 
 export default defineComponent({
   name: 'AppButton',
+
+  components: {
+    AppLink,
+  },
 
   props: {
     variant: {
@@ -73,6 +80,7 @@ export default defineComponent({
   font-family: 'Roboto', sans-serif;
   border: none;
   cursor: pointer;
+  text-decoration: none;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16),
     0 0 0 0.5px rgba(0, 0, 0, 0.08),
     inset 0 0 0 0.5px rgba(0, 0, 0, 0.08),
