@@ -1,22 +1,18 @@
 <template>
+  <TheHeader />
   <RouterView />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-import { ContactTableName } from '@/services/contact.service';
-import { createTable } from './database';
-
-const useBootstrap = () => {
-  createTable(ContactTableName);
-};
+import TheHeader from '@/components/TheHeader.vue';
 
 export default defineComponent({
   name: 'App',
 
-  setup() {
-    useBootstrap();
+  components: {
+    TheHeader,
   },
 });
 </script>

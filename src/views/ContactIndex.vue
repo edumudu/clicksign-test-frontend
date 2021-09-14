@@ -1,35 +1,6 @@
 <template>
-  <header :class="$style.header">
-    <div
-      class="mr-auto"
-      :class="$style.headerLogoWrapper"
-    >
-      <LogoSvg />
-    </div>
-
-    <AppButton
-      v-if="hasContact"
-      variant="secondary"
-      @click="onContactCreate"
-    >
-      <IconPlus class="font-md" />
-
-      <span :class="$style.headerContactCreateText">
-        Criar contato
-      </span>
-    </AppButton>
-
-    <AppInput
-      v-model="search"
-      placeholder="Buscar..."
-      class="flex-1"
-      variant="secondary"
-      :class="$style.searchField"
-    />
-  </header>
-
   <div
-    v-if="hasContact"
+    v-if="hasSearchedContact"
     :class="$style.content"
   >
     <table :class="$style.table">
@@ -106,7 +77,7 @@
       large
       variant="secondary"
       :class="$style.createContact"
-      @click="onContactCreate"
+      :to="{ name: 'ContactCreate' }"
     >
       <IconPlus class="font-md" />
 
@@ -118,72 +89,27 @@
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  ref,
-  computed,
-  watch,
-  Ref,
-} from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { defineComponent, ref } from 'vue';
 
-import { useContacts } from '@/services/contact.service';
-import { Contact } from '@/types/contact';
+import { useContacts } from '@/store/contact';
 
 import EmptyData from '@/components/EmptyData.vue';
 import AppAvatar from '@/components/AppAvatar.vue';
 import AppButton from '@/components/AppButton.vue';
-import AppInput from '@/components/AppInput.vue';
 import AppLink from '@/components/AppLink.vue';
 
 import IconDelete from '@/assets/svg/icons/icon-delete.svg?inline';
 import IconEdit from '@/assets/svg/icons/icon-edit.svg?inline';
 import IconPlus from '@/assets/svg/icons/icon-plus.svg?inline';
-import LogoSvg from '@/assets/svg/logo.svg?inline';
-
-const useSearch = (contacts: Ref<Contact[]>) => {
-  const route = useRoute();
-  const router = useRouter();
-
-  const search = computed<string>({
-    get: () => (Array.isArray(route.query.search) ? route.query.search[0] || '' : route.query.search || ''),
-
-    set(value: string) {
-      router.push({ query: { search: value } });
-    },
-  });
-
-  const searchedContacts = computed(() => (
-    contacts.value.filter(({ name }) => name.includes(search.value))
-  ));
-
-  return {
-    search,
-    searchedContacts,
-  };
-};
 
 const useContact = () => {
-  const router = useRouter();
-  const route = useRoute();
-  const { fetchContacts } = useContacts();
-  const contacts = ref(fetchContacts());
-  const { search, searchedContacts } = useSearch(contacts);
-  const hasContact = computed(() => searchedContacts.value.length > 0);
+  const { hasSearchedContact, fetchContacts, searchedContacts } = useContacts();
 
-  const onContactCreate = () => {
-    router.push({ name: 'ContactCreate' });
-  };
-
-  watch(() => route, () => {
-    contacts.value = fetchContacts();
-  }, { deep: true });
+  fetchContacts();
 
   return {
-    search,
     contacts: searchedContacts,
-    hasContact,
-    onContactCreate,
+    hasSearchedContact,
   };
 };
 
@@ -214,9 +140,7 @@ export default defineComponent({
     IconDelete,
     IconEdit,
     AppButton,
-    LogoSvg,
     IconPlus,
-    AppInput,
     AppLink,
   },
 
@@ -315,37 +239,5 @@ export default defineComponent({
 
 .createContact {
   margin-top: 1.5rem;
-}
-
-// header
-.header {
-  padding: 1rem;
-  display: flex;
-  justify-content: flex-end;
-  gap: 1.5rem;
-  align-items: center;
-  color: var(--color-primary);
-  flex-wrap: wrap;
-
-  .headerContactCreateText {
-    display: none;
-
-    @include sm {
-      display: inline-block;
-    }
-  }
-
-  .headerLogoWrapper {
-    width: 100%;
-    text-align: center;
-
-    @include sm {
-      width: auto;
-    }
-  };
-}
-
-.searchField {
-  max-width: 1032px;
 }
 </style>

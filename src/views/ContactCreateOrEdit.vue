@@ -52,11 +52,14 @@
 
 <script lang="ts">
 import {
-  defineComponent, ref, computed, SetupContext,
+  defineComponent,
+  ref,
+  computed,
+  SetupContext,
 } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 
-import { useContacts, CreateDto } from '@/services/contact.service';
+import { useContacts, CreateDto } from '@/store/contact';
 
 import BaseModal from '@/components/BaseModal.vue';
 import AppInput from '@/components/AppInput.vue';

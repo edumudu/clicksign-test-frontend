@@ -30,7 +30,7 @@
 import { defineComponent } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
-import { useContacts } from '@/services/contact.service';
+import { useContacts } from '@/store/contact';
 
 import BaseModal from '@/components/BaseModal.vue';
 import AppButton from '@/components/AppButton.vue';
